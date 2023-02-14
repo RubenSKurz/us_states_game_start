@@ -14,6 +14,8 @@ guessed_correct = []
 game_is_on = True
 while game_is_on:
     answer_state = screen.textinput(title=f"{count}/50 Guess the State", prompt="What is another state name?").title()
+    if answer_state == "Exit":
+        break
     if answer_state in data["state"].unique():
         if answer_state in guessed_correct:
             pass
@@ -32,3 +34,14 @@ while game_is_on:
         game_is_on = False
     else:
         pass
+
+# if item in 50_states.csv, names,  is in guessed correct ignore ,else append to another .csv file
+states_to_learn = []
+for item in data["state"]:
+    if item in guessed_correct:
+        pass
+    else:
+        states_to_learn.append(item)
+
+panda = pandas.DataFrame(states_to_learn)
+panda.to_csv('list_to_learn.csv', index_label="column")
