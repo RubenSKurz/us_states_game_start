@@ -35,13 +35,8 @@ while game_is_on:
     else:
         pass
 
-# if item in 50_states.csv, names,  is in guessed correct ignore ,else append to another .csv file
-states_to_learn = []
-for item in data["state"]:
-    if item in guessed_correct:
-        pass
-    else:
-        states_to_learn.append(item)
+all_states = [name for name in data["state"]]
+states_to_learn = [name for name in all_states if name not in guessed_correct]
 
 panda = pandas.DataFrame(states_to_learn)
 panda.to_csv('list_to_learn.csv', index_label="column")
